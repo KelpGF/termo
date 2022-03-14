@@ -12,7 +12,7 @@ function gerarInputs() {
             const funcao = `keyTecladoInput(event, ${index}, ${idx}, value)`;
 
             inputs += `
-                <div class="col-2" style="margin-left:-15px" >
+                <div class="col-2" style="margin-left:-15px">
                     <input type="text" maxlength="1" class="form-control input-tentativa" id="input${index}_${idx}"
                         onKeyUp="${funcao}" disabled
                     />
@@ -51,9 +51,9 @@ function gerarDivTentativas() {
         }
 
         badges += `
-            <div class="col-2" style="margin-left:-14.5px">
+            <div class="col-2" style="margin-left:-15px; margin-bottom:-5px; margin-top:5px">
                 <h2>
-                    <span class="input-tentativa border-light badge bg-${color} tentativa" style="height: 58px; width: 58px;">
+                    <span class="input-tentativa badge bg-${color} tentativa" style="height: 60px; width: 60px;">
                         ${tentativas_com_chars_especiais[num_tentativa][idx]}
                     </span>
                 </h2>
@@ -67,6 +67,7 @@ function gerarDivTentativas() {
     });
 
     document.getElementById("tentativa" + num_tentativa).innerHTML = badges;
+    document.getElementById("tentativa" + num_tentativa).style.marginLeft = "-9px";
 }
 
 gerarInputs();
