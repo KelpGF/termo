@@ -32,9 +32,7 @@ function pegarPalavra() {
 }
 
 function enableInputs(num_tentativa, enable = false) {
-    const inputs = document.querySelectorAll(
-        `#tentativa${num_tentativa} input`
-    );
+    const inputs = document.querySelectorAll(`#tentativa${num_tentativa} input`);
 
     for (let index = 0; index < inputs.length; index++) {
         const input = inputs[index];
@@ -44,11 +42,39 @@ function enableInputs(num_tentativa, enable = false) {
     document.getElementById("input" + num_tentativa + "_0").focus();
 }
 
-function selecionarLetraTecladoDigital(letra) {
-    if (letra == "limpar") {
-        return;
+function selecionarLetraTecladoDigital(e) {
+    let num_tentativa;
+    let posicao_letra;
+
+    const letra = e.target.value;
+    const condicao_limpar = letra !== "Backspace";
+
+    if (tentativas.length == 0) {
+        num_tentativa = 0;
+        posicao_letra = 0;
+    } else {
+        num_tentativa = tentativas.length - 1;
+
+        const tentativa = tentativas[tentativas.length - 1];
+
+        posicao_letra = tentativa.indexOf("");
+
+        if (posicao_letra == -1) posicao_letra = 4;
+
+        if (!condicao_limpar && posicao_letra > 0 && tentativas[num_tentativa][posicao_letra] == "") posicao_letra--;
     }
-    letra = letra.toLowerCase();
+
+    const objectEvent = {
+        code: condicao_limpar ? "Key" + letra.toUpperCase() : letra,
+        key: letra,
+    };
+
+    let input = document.getElementById(`input${num_tentativa}_${posicao_letra}`);
+
+    if (!input) input = document.getElementById(`input${++num_tentativa}_${(posicao_letra = 0)}`);
+    input.value = condicao_limpar ? letra : "";
+
+    keyTecladoInput(objectEvent, num_tentativa, posicao_letra, input.value);
 }
 
 function validarTentativa() {
@@ -58,45 +84,33 @@ function validarTentativa() {
 }
 
 function keyTecladoInput(e, num_tentativa, posicao_letra, letra) {
+    const tentativa = tentativas[num_tentativa];
+
     const arrowsFunctions = {
         ArrowRight: () => {
-            document
-                .getElementById(
-                    `input${num_tentativa}_${
-                        posicao_letra == 4 ? posicao_letra : posicao_letra + 1
-                    }`
-                )
-                .focus();
+            document.getElementById(`input${num_tentativa}_${posicao_letra == 4 ? posicao_letra : posicao_letra + 1}`).focus();
         },
         ArrowDown: () => {
-            document
-                .getElementById(
-                    `input${num_tentativa}_${
-                        posicao_letra == 4 ? posicao_letra : posicao_letra + 1
-                    }`
-                )
-                .focus();
+            document.getElementById(`input${num_tentativa}_${posicao_letra == 4 ? posicao_letra : posicao_letra + 1}`).focus();
         },
 
         ArrowLeft: () => {
-            document
-                .getElementById(
-                    `input${num_tentativa}_${
-                        posicao_letra == 0 ? posicao_letra : posicao_letra - 1
-                    }`
-                )
-                .focus();
+            document.getElementById(`input${num_tentativa}_${posicao_letra == 0 ? posicao_letra : posicao_letra - 1}`).focus();
         },
         ArrowUp: () => {
-            document
-                .getElementById(
-                    `input${num_tentativa}_${
-                        posicao_letra == 0 ? posicao_letra : posicao_letra - 1
-                    }`
-                )
-                .focus();
+            document.getElementById(`input${num_tentativa}_${posicao_letra == 0 ? posicao_letra : posicao_letra - 1}`).focus();
         },
     };
+
+    if (e.code == "Enter") {
+        tentar();
+        return;
+    }
+
+    if (tentativa && e.code == "Backspace" && posicao_letra > 0 && tentativa[posicao_letra] == "") {
+        document.getElementById("input" + num_tentativa + "_" + (posicao_letra - 1)).focus();
+        return;
+    }
 
     if (e.code.includes("Arrow")) {
         arrowsFunctions[e.code]();
@@ -104,17 +118,15 @@ function keyTecladoInput(e, num_tentativa, posicao_letra, letra) {
         return;
     }
 
-    if (!e.code.includes("Key") && e.key !== "ç") {
-        document.getElementById(
-            "input" + num_tentativa + "_" + posicao_letra
-        ).value = "";
+    if (!e.code.includes("Key") && e.key !== "ç" && e.code !== "Backspace") {
+        document.getElementById("input" + num_tentativa + "_" + posicao_letra).value = tentativa ? tentativa[posicao_letra] : "";
 
         return;
     }
 
-    letra = letra.toLowerCase();
+    if (letra != "") letra = letra.toLowerCase();
 
-    if (typeof tentativas[num_tentativa] == "undefined") {
+    if (typeof tentativa == "undefined") {
         tentativas.push(["", "", "", "", ""]);
         tentativas_com_chars_especiais.push(["", "", "", "", ""]);
     }
@@ -122,12 +134,14 @@ function keyTecladoInput(e, num_tentativa, posicao_letra, letra) {
     tentativa_incompleta = validarTentativa();
     tentativas_com_chars_especiais[num_tentativa][posicao_letra] = letra;
 
-    for (const char_normal in special_chars) {
-        const chars_especiais = special_chars[char_normal];
+    if (letra != "") {
+        for (const char_normal in special_chars) {
+            const chars_especiais = special_chars[char_normal];
 
-        if (chars_especiais.includes(letra)) {
-            letra = char_normal;
-            break;
+            if (chars_especiais.includes(letra)) {
+                letra = char_normal;
+                break;
+            }
         }
     }
 
@@ -135,11 +149,7 @@ function keyTecladoInput(e, num_tentativa, posicao_letra, letra) {
 
     if (letra != "") {
         if (posicao_letra != 4) {
-            posicao_letra++;
-
-            document
-                .getElementById("input" + num_tentativa + "_" + posicao_letra)
-                .focus();
+            document.getElementById("input" + num_tentativa + "_" + (posicao_letra + 1)).focus();
         } else {
             tentativa_incompleta = false;
         }
@@ -168,9 +178,7 @@ function compararRespostas() {
     } else {
         if (tentativas.length == qtd_tentativas) {
             setTimeout(() => {
-                alert(
-                    "perdeu otário, era " + palavra_com_chars_especiais.join("")
-                );
+                alert("perdeu otário, era " + palavra_com_chars_especiais.join(""));
                 reiniciar();
             }, 500);
         } else {
@@ -211,3 +219,9 @@ setTimeout(() => {
     // gerarDivTentativas();
     // compararRespostas();
 }, 500);
+
+const letras_teclado = document.querySelectorAll(".letra");
+
+for (const element of letras_teclado) {
+    element.addEventListener("click", selecionarLetraTecladoDigital);
+}

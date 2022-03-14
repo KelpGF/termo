@@ -48,6 +48,10 @@ input {
     font-weight: bold;
 }
 
+.btn-warning {
+    background-color: rgb(228, 146, 39) !important;
+}
+
 .input-tentativa:disabled{
     border-style: solid;
     border-color: #192348;

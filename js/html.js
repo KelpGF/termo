@@ -62,7 +62,7 @@ function gerarDivTentativas() {
 
         if (!letras_corretas.includes(letra)) {
             btn_letra.classList.add(`btn-${color}`);
-            btn_letra.disabled = true;
+            if (color !== "warning") btn_letra.disabled = true;
         }
     });
 
