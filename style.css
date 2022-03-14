@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka&display=swap');
+
 input {
     width: 3em !important;
     margin: 3px;
@@ -10,12 +12,69 @@ input {
 .tentativa {
     width: 2em;
 }
-
+.font{
+    font-family: 'Fredoka', sans-serif;
+}
 .letra {
-    width: 1em !important;
-    border-radius: 25px;
+    width: 45px;
+    height: 48px;
+    border-radius: 6px;
     margin: 2px;
-    vertical-align: middle;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: bold;
+}
+
+.teclado{
+    border-style: solid;
+    border-color: #374676;
+    background-color: #374676;
+}
+
+.teclado:hover{
+    background-color: #101730;
+    transition: 0.5s;
+    border-width: 3px;
+}
+.input-tentativa{
+    border-style: solid;
+    border-color: #374676;
+    background-color: #101730;
+    border-width: 5px;
+    min-width: 60px;
+    height: 60px;
+    font-family: 'Fredoka', sans-serif;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}
+
+.input-tentativa:disabled{
+    border-style: solid;
+    border-color: #192348;
+    background-color: #192348;
+    border-width: 5px;
+    min-width: 60px;
+    height: 60px;
+    text-align: center;
+}
+.input-tentativa:focus{
+    border-style: solid;
+    border-color: #374676;
+    background-color: #374676;
+    border-width: 5px;
+    min-width: 60px;
+    height: 60px;
+    font-family: 'Fredoka', sans-serif;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}
+.letra-enter {
+    width: auto;
+    border-radius: 6px;
+    margin: 2px;
+    font-family: 'Fredoka', sans-serif;
+    font-weight: bold;
 }
 
 body {

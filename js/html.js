@@ -12,8 +12,8 @@ function gerarInputs() {
             const funcao = `keyTecladoInput(event, ${index}, ${idx}, value)`;
 
             inputs += `
-                <div class="col-2">
-                    <input type="text" maxlength="1" class="form-control" id="input${index}_${idx}"
+                <div class="col-2" style="margin-left:-15px" >
+                    <input type="text" maxlength="1" class="form-control input-tentativa" id="input${index}_${idx}"
                         onKeyUp="${funcao}" disabled
                     />
                 </div>
@@ -34,14 +34,14 @@ function gerarDivTentativas() {
 
     tentativas[num_tentativa].map((letra, idx) => {
         let color = "dark";
-
+        
         const btn_letra = document.getElementById(letra);
 
         if (letra == palavra[idx]) {
             color = "success";
             if (!letras_corretas.includes(letra)) {
                 letras_corretas.push(letra);
-
+                
                 btn_letra.classList.add(`btn-${color}`);
                 btn_letra.disabled = true;
             }
@@ -50,9 +50,9 @@ function gerarDivTentativas() {
         }
 
         badges += `
-            <div class="col-2">
+            <div class="col-2" style="margin-left:-15px">
                 <h2>
-                    <span class="border border-light badge bg-${color} tentativa">
+                    <span class="input-tentativa border-light badge bg-${color} tentativa" style="height: 58px; width: 58px;">
                         ${tentativas_com_chars_especiais[num_tentativa][idx]}
                     </span>
                 </h2>
