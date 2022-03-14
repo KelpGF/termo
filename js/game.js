@@ -11,6 +11,7 @@ const special_chars = {
     i: ["í", "î"],
     o: ["ó", "ô", "õ"],
     u: ["ú", "û"],
+    c: ["ç"],
 };
 
 function pegarPalavra() {
@@ -41,6 +42,13 @@ function enableInputs(num_tentativa, enable = false) {
     }
 
     document.getElementById("input" + num_tentativa + "_0").focus();
+}
+
+function selecionarLetraTecladoDigital(letra) {
+    if (letra == "limpar") {
+        return;
+    }
+    letra = letra.toLowerCase();
 }
 
 function validarTentativa() {

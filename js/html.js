@@ -34,14 +34,15 @@ function gerarDivTentativas() {
 
     tentativas[num_tentativa].map((letra, idx) => {
         let color = "dark";
-        
+
         const btn_letra = document.getElementById(letra);
 
         if (letra == palavra[idx]) {
             color = "success";
             if (!letras_corretas.includes(letra)) {
                 letras_corretas.push(letra);
-                
+
+                btn_letra.classList.remove(`btn-warning`);
                 btn_letra.classList.add(`btn-${color}`);
                 btn_letra.disabled = true;
             }
@@ -50,7 +51,7 @@ function gerarDivTentativas() {
         }
 
         badges += `
-            <div class="col-2" style="margin-left:-15px">
+            <div class="col-2" style="margin-left:-14.5px">
                 <h2>
                     <span class="input-tentativa border-light badge bg-${color} tentativa" style="height: 58px; width: 58px;">
                         ${tentativas_com_chars_especiais[num_tentativa][idx]}
