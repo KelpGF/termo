@@ -35,14 +35,15 @@ function gerarDivTentativas() {
     tentativas[num_tentativa].map((letra, idx) => {
         let color = "dark";
 
+        const btn_letra = document.getElementById(letra);
+
         if (letra == palavra[idx]) {
             color = "success";
             if (!letras_corretas.includes(letra)) {
                 letras_corretas.push(letra);
 
-                document
-                    .getElementById(letra)
-                    .classList.add("badge", `bg-${color}`);
+                btn_letra.classList.add(`btn-${color}`);
+                btn_letra.disabled = true;
             }
         } else if (palavra.includes(letra)) {
             color = "warning";
@@ -59,9 +60,8 @@ function gerarDivTentativas() {
         `;
 
         if (!letras_corretas.includes(letra)) {
-            document
-                .getElementById(letra)
-                .classList.add("badge", `bg-${color}`);
+            btn_letra.classList.add(`btn-${color}`);
+            btn_letra.disabled = true;
         }
     });
 
