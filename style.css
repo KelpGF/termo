@@ -1,0 +1,24 @@
+input {
+    width: 3em !important;
+    margin: 3px;
+}
+
+.bg-warning {
+    background-color: rgb(228, 146, 39) !important;
+}
+
+.tentativa {
+    width: 2em;
+}
+
+.letra {
+    width: 1em !important;
+    border-radius: 25px;
+    margin: 2px;
+    vertical-align: middle;
+}
+
+body {
+    margin: 0 auto;
+    background-color: rgb(20, 20, 20);
+}
