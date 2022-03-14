@@ -51,7 +51,7 @@ function gerarDivTentativas() {
         }
 
         badges += `
-            <div class="col-2" style="margin-left:-15px; margin-bottom:-5px; margin-top:5px">
+            <div class="col-2" style="margin-left:-15px; margin-bottom:-5px; margin-top:4px">
                 <h2>
                     <span class="input-tentativa badge bg-${color} tentativa" style="height: 60px; width: 60px;">
                         ${tentativas_com_chars_especiais[num_tentativa][idx]}
