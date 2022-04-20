@@ -179,7 +179,7 @@ function compararRespostas() {
     } else {
         if (tentativas.length == qtd_tentativas) {
             setTimeout(() => {
-                alert("perdeu otário, era " + palavra_com_chars_especiais.join(""));
+                alert("perdeu, era: " + palavra_com_chars_especiais.join(""));
                 reiniciar();
             }, 500);
         } else {
@@ -210,15 +210,14 @@ function reiniciar() {
     for (let index = 0; index < letras.length; index++) {
         const badge_letra = letras[index];
 
-        badge_letra.classList.remove("bg-dark", "bg-success", "bg-warning");
+        badge_letra.disabled = false;
+        badge_letra.classList.remove("bg-dark", "bg-success", "bg-warning", "btn-dark", "btn-success", "btn-warning");
     }
 }
 
 setTimeout(() => {
     enableInputs(tentativas.length);
     pegarPalavra();
-    // gerarDivTentativas();
-    // compararRespostas();
 }, 500);
 
 const letras_teclado = document.querySelectorAll(".letra");
