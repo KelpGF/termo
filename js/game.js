@@ -159,8 +159,9 @@ function keyTecladoInput(e, num_tentativa, posicao_letra, letra) {
 function compararRespostas() {
     let correta = true;
 
+    const tentativa = tentativas[tentativas.length - 1];
+
     for (let index = 0; index < palavra.length; index++) {
-        const tentativa = tentativas[tentativas.length - 1];
 
         if (tentativa[index] != palavra[index]) {
             correta = false;
@@ -189,7 +190,7 @@ function compararRespostas() {
 }
 
 function tentar() {
-    if (!tentativa_incompleta) {
+    if (!tentativa_incompleta /*&& palavras.includes(tentativas[tentativas.length - 1].join(''))*/) {
         compararRespostas();
         gerarDivTentativas();
     }

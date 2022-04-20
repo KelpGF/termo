@@ -39,12 +39,12 @@ function gerarDivTentativas() {
 
         if (letra == palavra[idx]) {
             color = "success";
+
             if (!letras_corretas.includes(letra)) {
                 letras_corretas.push(letra);
 
                 btn_letra.classList.remove(`btn-warning`);
                 btn_letra.classList.add(`btn-${color}`);
-                btn_letra.disabled = true;
             }
         } else if (palavra.includes(letra)) {
             color = "warning";
@@ -62,7 +62,7 @@ function gerarDivTentativas() {
 
         if (!letras_corretas.includes(letra)) {
             btn_letra.classList.add(`btn-${color}`);
-            if (color !== "warning") btn_letra.disabled = true;
+            if (color === "dark") btn_letra.disabled = true;
         }
     });
 

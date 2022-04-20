@@ -52,6 +52,10 @@ input {
     background-color: rgb(228, 146, 39) !important;
 }
 
+.btn-success {
+    background-color: #198754 !important;
+}
+
 .input-tentativa:disabled{
     border-style: solid;
     border-color: #192348;
